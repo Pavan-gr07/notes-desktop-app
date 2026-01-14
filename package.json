@@ -6,8 +6,8 @@
     "scripts": {
         "dev:renderer": "vite",
         "build:main": "tsc -p tsconfig.main.json",
-        "start": "npm run build:main && cross-env NODE_ENV=development electron .",
-        "build:renderer": "vite build"
+        "dev": "concurrently \"npm run dev:renderer\" \"wait-on http://localhost:5173 && npm run start\"",
+        "start": "npm run build:main && cross-env NODE_ENV=development electron ."
     },
     "keywords": [],
     "author": "",
@@ -34,5 +34,26 @@
         "react": "^19.2.3",
         "react-dom": "^19.2.3",
         "tailwindcss": "^4.1.18"
+    },
+    "build": {
+        "appId": "com.yourname.electronapp",
+        "productName": "ElectronNotes",
+        "directories": {
+            "output": "dist/installers"
+        },
+        "files": [
+            "dist/main/**/*",
+            "dist/preload/**/*",
+            "dist/renderer/**/*",
+            "package.json"
+        ],
+        "win": {
+            "target": "nsis",
+            "icon": "public/icon.ico"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true
+        }
     }
 }

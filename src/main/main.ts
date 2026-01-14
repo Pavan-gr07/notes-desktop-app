@@ -21,7 +21,7 @@ function createWindow() {
         width: 1200,
         height: 800,
         frame: false, // For your custom titlebar
-        icon: path.join(__dirname, isDev ? '../public/icon.ico' : '../build/icon.ico'),
+        icon: path.join(__dirname, '../../public/icon.ico'),
         webPreferences: {
             // IMPORTANT: Ensure this path points to your compiled preload.js
             preload: path.join(__dirname, "../preload/preload.js"),
@@ -29,6 +29,8 @@ function createWindow() {
             nodeIntegration: false
         }
     });
+
+
 
     if (isDev) {
         win.loadURL('http://localhost:5173');
@@ -61,3 +63,8 @@ ipcMain.handle('settings:get', () => readData().settings);
 ipcMain.handle('settings:save', (_, settings) => saveData('settings', settings));
 
 app.whenReady().then(createWindow);
+
+
+app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") app.quit();
+});
