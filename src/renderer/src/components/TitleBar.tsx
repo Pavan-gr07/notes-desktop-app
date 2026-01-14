@@ -10,7 +10,7 @@ interface TitleBarProps {
 export function TitleBar({ user }: TitleBarProps) {
     return (
         <div
-            className="flex h-12 items-center justify-between bg-white border-b border-gray-200 px-4 select-none"
+            className="flex h-12 items-center justify-between bg-white border-b border-gray-200 px-2 select-none"
             style={{ WebkitAppRegion: 'drag' } as any}
         >
             {/* LEFT: Logo & Name */}
@@ -36,6 +36,7 @@ export function TitleBar({ user }: TitleBarProps) {
                 <button className="p-2 hover:bg-gray-100 rounded-full mr-2 transition-colors">
                     <User className="w-4 h-4 text-gray-600" />
                 </button>
+                <span>{user.name}</span>
 
                 <div className="flex">
                     <button
@@ -58,7 +59,7 @@ export function TitleBar({ user }: TitleBarProps) {
                     </button>
                 </div>
             </div>
-            <span>{user.name}</span>
+
         </div>
     );
 }
