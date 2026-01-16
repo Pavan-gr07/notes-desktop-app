@@ -21,7 +21,7 @@ function createWindow() {
         width: 1200,
         height: 800,
         frame: false, // For your custom titlebar
-        icon: path.join(__dirname, '../../public/icon.ico'),
+        icon: path.join(__dirname, isDev ? '../../public/icon.ico' : '../renderer/icon.ico'),
         webPreferences: {
             // IMPORTANT: Ensure this path points to your compiled preload.js
             preload: path.join(__dirname, "../preload/preload.js"),
@@ -34,6 +34,7 @@ function createWindow() {
 
     if (isDev) {
         win.loadURL('http://localhost:5173');
+        win.webContents.openDevTools();
     } else {
         win.loadFile(path.join(__dirname, '../renderer/index.html'));
     }
